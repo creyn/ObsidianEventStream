@@ -1,0 +1,10 @@
+{
+  "userIgnoreFilters": [
+    "src/"
+  ],
+  "newFileLocation": "folder",
+  "newFileFolderPath": "docs",
+  "newLinkFormat": "absolute",
+  "useMarkdownLinks": true,
+  "attachmentFolderPath": "docs/_attachments"
+}

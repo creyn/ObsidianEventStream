@@ -1,0 +1,15 @@
+{
+	"nodes":[
+		{"id":"15552bd146acd62c","x":43,"y":-207,"width":587,"height":100,"color":"2","type":"group","label":"This is a group"},
+		{"id":"92d802fea7ceb339","x":-305,"y":-168,"width":250,"height":60,"type":"text","text":"This is card"},
+		{"id":"a8a6b51e70f9d17d","x":-55,"y":0,"width":250,"height":60,"type":"text","text":"This is another card"},
+		{"id":"9238c230c63c283e","x":-380,"y":140,"width":400,"height":400,"type":"file","file":"README.md"},
+		{"id":"058452a8fa08898d","x":70,"y":140,"width":610,"height":400,"type":"link","url":"https://www.pawelkowalik.com/obsidian/"},
+		{"id":"ecb5392f059d1156","x":260,"y":-39,"width":400,"height":139,"type":"file","file":"docs/_attachments/Pasted image 20240505123925.png"},
+		{"id":"0671dbd17ef83214","x":63,"y":-187,"width":250,"height":60,"type":"text","text":"# group 1"},
+		{"id":"454c6e9d475df2ec","x":360,"y":-187,"width":250,"height":60,"color":"3","type":"text","text":"## group 2"}
+	],
+	"edges":[
+		{"id":"4695a42756603a3d","fromNode":"92d802fea7ceb339","fromSide":"bottom","toNode":"a8a6b51e70f9d17d","toSide":"left","label":"This is link"}
+	]
+}

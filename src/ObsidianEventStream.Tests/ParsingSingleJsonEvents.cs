@@ -2,6 +2,7 @@
 
 namespace ObsidianEventStream.Tests;
 
+[Collection("emptyCanvas")]
 public class ParsingSingleJsonEvents
 {
     [Fact]

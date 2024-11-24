@@ -63,8 +63,13 @@ public class TestSystem
  
     public TestSystem FirstCard(string expectedLines)
     {
+        return AssertCardLines(expectedLines);
+    }
+
+    private TestSystem AssertCardLines(string expectedLines, int cardNumber = 1)
+    {
         var lines = expectedLines.Split(Environment.NewLine);
-        var cardLines = _canvas.EnumerateCards().First().text.Split(Environment.NewLine);
+        var cardLines = _canvas.EnumerateCards().Skip(cardNumber - 1).First().text.Split(Environment.NewLine);
         for (int i = 0; i < lines.Length; i++)
         {
             lines[i].Should().BeEquivalentTo(cardLines[i]);
@@ -88,5 +93,15 @@ public class TestSystem
         }
   
         return this;
+    }
+
+    public TestSystem SecondCard(string expectedLines)
+    {
+        return AssertCardLines(expectedLines, cardNumber: 2);
+    }
+
+    public TestSystem ThirdCard(string expectedLines)
+    {
+        return AssertCardLines(expectedLines, cardNumber: 3);
     }
 }

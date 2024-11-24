@@ -2,9 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObsidianEventStream.Api", "ObsidianEventStream.Api\ObsidianEventStream.Api.csproj", "{07E7F1EF-20FA-49A9-ACB0-4B45B034CC31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObsidianEventStream.Canvas", "ObsidianEventStream.Canvas\ObsidianEventStream.Canvas.csproj", "{AB5540E0-A055-440A-9A28-BC4F2DA1581B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObsidianEventStream", "ObsidianEventStream\ObsidianEventStream.csproj", "{AB5540E0-A055-440A-9A28-BC4F2DA1581B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObsidianEventStream.Console", "ObsidianEventStream.Console\ObsidianEventStream.Console.csproj", "{69D706D1-5C9B-487A-A58B-BD266E6E550E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObsidianEventStream.Tests", "ObsidianEventStream.Tests\ObsidianEventStream.Tests.csproj", "{9908B8F9-215D-4054-B44C-5D9BB29F8500}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +26,9 @@ Global
 		{69D706D1-5C9B-487A-A58B-BD266E6E550E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69D706D1-5C9B-487A-A58B-BD266E6E550E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69D706D1-5C9B-487A-A58B-BD266E6E550E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9908B8F9-215D-4054-B44C-5D9BB29F8500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9908B8F9-215D-4054-B44C-5D9BB29F8500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9908B8F9-215D-4054-B44C-5D9BB29F8500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9908B8F9-215D-4054-B44C-5D9BB29F8500}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

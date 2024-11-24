@@ -1,0 +1,272 @@
+﻿[
+  {
+    "_id": "67194a9fed6efe61d4089235",
+    "index": 0,
+    "guid": "aaaddbf7-b26d-4233-b0d4-feb54f868b40",
+    "isActive": true,
+    "balance": "$2,846.04",
+    "picture": "http://placehold.it/32x32",
+    "age": 40,
+    "eyeColor": "green",
+    "name": "Natasha Fuller",
+    "gender": "female",
+    "company": "BICOL",
+    "email": "natashafuller@bicol.com",
+    "phone": "+1 (825) 416-2966",
+    "address": "465 Ebony Court, Fairforest, Maine, 1109",
+    "about": "Adipisicing eu reprehenderit occaecat culpa veniam ad labore ut ipsum ullamco cupidatat est enim. Et aute tempor nisi nisi minim ipsum nulla et incididunt reprehenderit eu. Consequat incididunt velit anim ad in.\r\n",
+    "registered": "2023-09-30T03:23:01 -02:00",
+    "latitude": -42.750526,
+    "longitude": 33.527063,
+    "tags": [
+      "do",
+      "sint",
+      "do",
+      "officia",
+      "ea",
+      "dolor",
+      "nostrud"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Finley Browning"
+      },
+      {
+        "id": 1,
+        "name": "Lucas Mcmahon"
+      },
+      {
+        "id": 2,
+        "name": "Deena Heath"
+      }
+    ],
+    "greeting": "Hello, Natasha Fuller! You have 1 unread messages.",
+    "favoriteFruit": "banana"
+  },
+  {
+    "_id": "67194a9fa2933c9fdf8a44de",
+    "index": 1,
+    "guid": "65785ebe-4094-4972-9844-d4f06e3ffb65",
+    "isActive": true,
+    "balance": "$2,746.96",
+    "picture": "http://placehold.it/32x32",
+    "age": 30,
+    "eyeColor": "green",
+    "name": "Calhoun Russell",
+    "gender": "male",
+    "company": "STOCKPOST",
+    "email": "calhounrussell@stockpost.com",
+    "phone": "+1 (937) 467-2542",
+    "address": "726 Metropolitan Avenue, Kaka, Virgin Islands, 3752",
+    "about": "Officia dolore officia sit duis dolor ipsum ipsum Lorem non. Do elit non nulla ad aute ea duis occaecat non. Lorem ea dolore consequat ipsum elit eiusmod eu eu pariatur. Laborum tempor aute et duis enim proident id.\r\n",
+    "registered": "2020-03-25T10:18:49 -01:00",
+    "latitude": 10.387474,
+    "longitude": 44.599364,
+    "tags": [
+      "dolore",
+      "elit",
+      "incididunt",
+      "magna",
+      "ea",
+      "non",
+      "sit"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Reyna Willis"
+      },
+      {
+        "id": 1,
+        "name": "Ines Rogers"
+      },
+      {
+        "id": 2,
+        "name": "Gale Miranda"
+      }
+    ],
+    "greeting": "Hello, Calhoun Russell! You have 7 unread messages.",
+    "favoriteFruit": "apple"
+  },
+  {
+    "_id": "67194a9f6c755823dea5fa53",
+    "index": 2,
+    "guid": "d2c6e031-ad74-4d69-ba94-bf110dd5b470",
+    "isActive": true,
+    "balance": "$2,142.23",
+    "picture": "http://placehold.it/32x32",
+    "age": 25,
+    "eyeColor": "brown",
+    "name": "Fitzgerald Howell",
+    "gender": "male",
+    "company": "ZENSOR",
+    "email": "fitzgeraldhowell@zensor.com",
+    "phone": "+1 (806) 556-2949",
+    "address": "848 Bergen Court, Roulette, Vermont, 2441",
+    "about": "Aute incididunt adipisicing incididunt cupidatat ipsum non duis laboris amet. Adipisicing ad consequat culpa sunt eiusmod commodo exercitation pariatur ad tempor cillum. Mollit aute Lorem aliquip sint sunt. Tempor incididunt esse dolor magna laboris. Ullamco proident officia esse dolore minim incididunt. Aute elit eu reprehenderit mollit fugiat ad. Laboris veniam esse consequat dolor et eu ea.\r\n",
+    "registered": "2019-10-14T11:40:24 -02:00",
+    "latitude": -6.295893,
+    "longitude": 59.973205,
+    "tags": [
+      "dolor",
+      "magna",
+      "cillum",
+      "ea",
+      "Lorem",
+      "ut",
+      "commodo"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Daugherty Flynn"
+      },
+      {
+        "id": 1,
+        "name": "Eleanor Baird"
+      },
+      {
+        "id": 2,
+        "name": "Bolton Tyson"
+      }
+    ],
+    "greeting": "Hello, Fitzgerald Howell! You have 10 unread messages.",
+    "favoriteFruit": "apple"
+  },
+  {
+    "_id": "67194a9fc6fea4e47464e7c0",
+    "index": 3,
+    "guid": "323c9ac4-61a3-4d1c-bfb7-9b525f39469b",
+    "isActive": true,
+    "balance": "$1,475.96",
+    "picture": "http://placehold.it/32x32",
+    "age": 26,
+    "eyeColor": "brown",
+    "name": "Meyers Crawford",
+    "gender": "male",
+    "company": "ZAPPIX",
+    "email": "meyerscrawford@zappix.com",
+    "phone": "+1 (848) 501-3063",
+    "address": "528 Fairview Place, Coloma, Indiana, 2433",
+    "about": "Laboris culpa ut dolore laborum deserunt labore. Exercitation qui laborum aliqua dolor eiusmod qui non deserunt. Ex nulla magna reprehenderit velit consectetur nisi duis quis deserunt. Sunt amet voluptate veniam sint cupidatat aliquip non minim. Laboris ad id fugiat amet Lorem eu eu magna nulla dolore est ipsum excepteur.\r\n",
+    "registered": "2018-12-26T06:41:32 -01:00",
+    "latitude": -62.424036,
+    "longitude": -16.2361,
+    "tags": [
+      "do",
+      "velit",
+      "nisi",
+      "in",
+      "mollit",
+      "ut",
+      "aliqua"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Mathews Leon"
+      },
+      {
+        "id": 1,
+        "name": "Charmaine Hines"
+      },
+      {
+        "id": 2,
+        "name": "Tisha Herring"
+      }
+    ],
+    "greeting": "Hello, Meyers Crawford! You have 8 unread messages.",
+    "favoriteFruit": "strawberry"
+  },
+  {
+    "_id": "67194a9fe1036a3920b19cb3",
+    "index": 4,
+    "guid": "ea0f42f5-2549-46c0-96ee-ea07103dea15",
+    "isActive": false,
+    "balance": "$2,699.37",
+    "picture": "http://placehold.it/32x32",
+    "age": 33,
+    "eyeColor": "blue",
+    "name": "Frye Wyatt",
+    "gender": "male",
+    "company": "IMPERIUM",
+    "email": "fryewyatt@imperium.com",
+    "phone": "+1 (800) 405-2190",
+    "address": "454 Banker Street, Deltaville, Rhode Island, 2335",
+    "about": "Velit consectetur adipisicing ut ex elit dolor nostrud in consequat occaecat. Laborum aute dolore nulla est dolor sint ex ad dolore. Voluptate irure dolor aliqua aliquip. Laboris laboris cillum incididunt exercitation anim Lorem tempor duis.\r\n",
+    "registered": "2017-12-10T05:31:32 -01:00",
+    "latitude": 88.440305,
+    "longitude": 9.385806,
+    "tags": [
+      "ut",
+      "ullamco",
+      "eu",
+      "veniam",
+      "mollit",
+      "exercitation",
+      "nostrud"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Hattie Hodge"
+      },
+      {
+        "id": 1,
+        "name": "Socorro Gray"
+      },
+      {
+        "id": 2,
+        "name": "Rita Vazquez"
+      }
+    ],
+    "greeting": "Hello, Frye Wyatt! You have 3 unread messages.",
+    "favoriteFruit": "banana"
+  },
+  {
+    "_id": "67194a9f077fca29adbff9a7",
+    "index": 5,
+    "guid": "ca9c4125-742f-4d5d-bddd-481e67e9a189",
+    "isActive": false,
+    "balance": "$3,787.01",
+    "picture": "http://placehold.it/32x32",
+    "age": 35,
+    "eyeColor": "green",
+    "name": "Casey Fernandez",
+    "gender": "male",
+    "company": "AQUAZURE",
+    "email": "caseyfernandez@aquazure.com",
+    "phone": "+1 (970) 549-3477",
+    "address": "986 Hornell Loop, Rose, Texas, 2852",
+    "about": "In ut aute enim et culpa amet. Incididunt exercitation tempor ea amet cupidatat consectetur qui fugiat elit sit sit dolore consequat. Reprehenderit mollit incididunt eu minim irure Lorem ut excepteur est. Reprehenderit ullamco adipisicing culpa et ipsum deserunt fugiat. Aliqua tempor ullamco adipisicing ad.\r\n",
+    "registered": "2014-04-05T09:19:28 -02:00",
+    "latitude": 30.792911,
+    "longitude": -93.727518,
+    "tags": [
+      "sit",
+      "et",
+      "ad",
+      "culpa",
+      "tempor",
+      "veniam",
+      "proident"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Moran Nieves"
+      },
+      {
+        "id": 1,
+        "name": "Lauren Gonzalez"
+      },
+      {
+        "id": 2,
+        "name": "Burks Roman"
+      }
+    ],
+    "greeting": "Hello, Casey Fernandez! You have 4 unread messages.",
+    "favoriteFruit": "banana"
+  }
+]

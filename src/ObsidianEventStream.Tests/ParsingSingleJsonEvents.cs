@@ -2,7 +2,7 @@
 
 namespace ObsidianEventStream.Tests;
 
-public class ParsingJsonEvents
+public class ParsingSingleJsonEvents
 {
     [Fact]
     public void Card_title_is_heading_with_JSON_property()

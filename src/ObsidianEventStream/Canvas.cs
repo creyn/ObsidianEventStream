@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Collections;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ObsidianEventStream;
@@ -215,6 +216,11 @@ public class Canvas
     public IEnumerable<Node> EnumerateCards()
     {
         return structure.nodes;
+    }
+
+    public IEnumerable<Edge> EnumerateLinks()
+    {
+        return structure.edges;
     }
 }
 

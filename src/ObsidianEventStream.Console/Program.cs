@@ -6,7 +6,9 @@ var canvasFilePath = @"C:\_projects\ObsidianEventStream\docs\Empty canvas create
 var canvas = Canvas.Initialize(canvasFilePath);
 
 var eventsFilePath = @"C:\_projects\ObsidianEventStream\src\ObsidianEventStream.Console\TestFiles\SomeRandomJson.json";
-canvas.AnalyzeEvents(eventsFilePath, title: "name", extract: "email;registered;friends.name;balance", promote: "company;phone");
+var config = new Configuration(title: "name", extract: "email;registered;friends.name;balance",
+    promote: "company;phone");
+canvas.AnalyzeEvents(eventsFilePath, config);
 
 Console.WriteLine($"Canvas: {canvas}");
 

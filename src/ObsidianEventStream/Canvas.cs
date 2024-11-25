@@ -40,7 +40,8 @@ public class Canvas
         return $"Canvas path: [{filePath}]. Nodes: [{structure.nodes.Count}]. Edges: [{structure.edges.Count}]";
     }
 
-    public void AnalyzeEvents(string eventsFilePath, string title, string extract, string promote)
+    // public void AnalyzeEvents(string eventsFilePath, string title, string extract, string promote, Func<string,string>? findJson = null)
+    public void AnalyzeEvents(string eventsFilePath, Configuration configuration)
     {
         if (File.Exists(eventsFilePath) == false)
         {
@@ -51,7 +52,7 @@ public class Canvas
 
         var events = new List<StreamEvent>();
         
-        ParseStreamEvents(title, extract, promote, fileContent, events);
+        ParseStreamEvents(fileContent, configuration, events);
         ShowOnCanvas(events);
 
         foreach (var streamEvent in events)
@@ -141,38 +142,72 @@ public class Canvas
         Console.WriteLine(">>>>>" + this.filePath + content);
     }
 
-    private void ParseStreamEvents(string title, string extract, string promote, string fileContent, List<StreamEvent> events)
+    private void ParseStreamEvents(string fileContent, Configuration configuration, List<StreamEvent> events)
     {
         try
         {
-            var json = JsonDocument.Parse(fileContent);
-            Console.WriteLine(json.RootElement.ValueKind);
-            if (json.RootElement.ValueKind == JsonValueKind.Array)
+            if (configuration.findJson != null)
             {
-                foreach (var element in json.RootElement.EnumerateArray())
+                var lines = fileContent.Split(Environment.NewLine);
+                foreach (var line in lines)
                 {
-                    // Console.WriteLine(element.ValueKind);
-                    if (element.ValueKind == JsonValueKind.Object)
+                    var element = configuration.findJson(line);
+                    var json = JsonDocument.Parse(element);
+                    if (json.RootElement.ValueKind == JsonValueKind.Object)
                     {
                         var streamEvent = new StreamEvent();
 
-                        streamEvent.Title = GetPropertyWithPath(element, title);
-                        var toExtract = extract.Split(';', StringSplitOptions.RemoveEmptyEntries);
-                        var toPromote = promote.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                        streamEvent.Title = GetPropertyWithPath(json.RootElement, configuration.title);
+                        var toExtract = configuration.extract.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                        var toPromote = configuration.promote.Split(';', StringSplitOptions.RemoveEmptyEntries);
 
                         foreach (var extractThis in toExtract)
                         {
-                            streamEvent.Extracted.Add(extractThis, GetPropertyWithPath(element, extractThis));
+                            streamEvent.Extracted.Add(extractThis, GetPropertyWithPath(json.RootElement, extractThis));
                         }
 
                         foreach (var promoteThis in toPromote)
                         {
-                            streamEvent.Promoted.Add(promoteThis, GetPropertyWithPath(element, promoteThis));
+                            streamEvent.Promoted.Add(promoteThis, GetPropertyWithPath(json.RootElement, promoteThis));
                         }
 
-                        streamEvent.FullJson = element.GetRawText();
+                        streamEvent.FullJson = json.RootElement.GetRawText();
 
                         events.Add(streamEvent);
+                    }
+                }
+            }
+            else
+            {
+                var json = JsonDocument.Parse(fileContent);
+                Console.WriteLine(json.RootElement.ValueKind);
+                if (json.RootElement.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var element in json.RootElement.EnumerateArray())
+                    {
+                        // Console.WriteLine(element.ValueKind);
+                        if (element.ValueKind == JsonValueKind.Object)
+                        {
+                            var streamEvent = new StreamEvent();
+
+                            streamEvent.Title = GetPropertyWithPath(element, configuration.title);
+                            var toExtract = configuration.extract.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                            var toPromote = configuration.promote.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+                            foreach (var extractThis in toExtract)
+                            {
+                                streamEvent.Extracted.Add(extractThis, GetPropertyWithPath(element, extractThis));
+                            }
+
+                            foreach (var promoteThis in toPromote)
+                            {
+                                streamEvent.Promoted.Add(promoteThis, GetPropertyWithPath(element, promoteThis));
+                            }
+
+                            streamEvent.FullJson = element.GetRawText();
+
+                            events.Add(streamEvent);
+                        }
                     }
                 }
             }

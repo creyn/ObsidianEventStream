@@ -10,6 +10,8 @@ public class TestSystem
     private string _promote = "";
     private Canvas _canvas;
     private string _currentCardIdForLinking;
+    private Func<string, string> _findJsonInDelimitedTextLine;
+    private string _currentLogType;
 
     public static TestSystem UsingEmptyCanvas(string path = "empty_file_for_tests.canvas")
     {
@@ -44,7 +46,8 @@ public class TestSystem
     public TestSystem Gives()
     {
         _canvas= Canvas.Initialize(_filePath);
-        _canvas.AnalyzeEvents("events_file_for_tests.txt", _title, _extract, _promote);
+        var config = new Configuration(_title, _extract, _promote, _findJsonInDelimitedTextLine);
+        _canvas.AnalyzeEvents("events_file_for_tests.txt", config);
         return this;
     }
 
@@ -103,5 +106,17 @@ public class TestSystem
     public TestSystem ThirdCard(string expectedLines)
     {
         return AssertCardLines(expectedLines, cardNumber: 3);
+    }
+
+    public TestSystem TakeEvent(Func<string, string> findJsonInDelimitedTextLine)
+    {
+        _findJsonInDelimitedTextLine = findJsonInDelimitedTextLine;
+        return this;
+    }
+
+    public TestSystem ForType(string typeFilter)
+    {
+        _currentLogType = typeFilter;
+        return this;
     }
 }

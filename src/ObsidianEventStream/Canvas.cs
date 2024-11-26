@@ -149,7 +149,9 @@ public class Canvas
             if (configuration.IsLogMode())
             {
                 var lines = fileContent.Split(Environment.NewLine);
-                foreach (var line in lines)
+                var filteredLines = lines.Where(x =>
+                    string.IsNullOrWhiteSpace(configuration.FilterBy()) || x.Contains(configuration.FilterBy()));
+                foreach (var line in filteredLines)
                 {
                     var eventTypeConfig = configuration.GetConfigurationForEventTypeInThisLine(line);
                     var foundEventString = eventTypeConfig.FindJson(line);

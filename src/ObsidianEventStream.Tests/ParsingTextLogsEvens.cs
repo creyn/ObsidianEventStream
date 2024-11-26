@@ -68,4 +68,23 @@ public class ParsingTextLogsEvens
             .FirstCard("# John")
             .SecondCard("# Mark");
     }
+    
+    [Fact]
+    public void Take_only_specific_lines_from_logs()
+    {
+        TestSystem.UsingEmptyCanvas()
+            .AnalyzeEventsLogs("""
+                               Some
+                               [2024-11-24 21:00:01][LoggerName][POST][{"name": "John", "age": 20}][https://google.com]
+                               not important
+                               [2024-11-24 21:00:01][LoggerName][POST][{"name": "Mark", "age": 20}][https://google.com]
+                               Lines
+                               """)
+            .Filter("[LoggerName]")
+            .TakeEvent(x => x.Split("][")[3])
+            .WithTitle("name")
+            .Gives()
+            .FirstCard("# John")
+            .SecondCard("# Mark");
+    }
 }

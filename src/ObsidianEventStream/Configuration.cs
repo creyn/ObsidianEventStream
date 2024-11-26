@@ -14,9 +14,10 @@ public class Configuration
 {
     private readonly Dictionary<string, TypeConfiguration> _typeConfigurations = new();
 
-    public Configuration(string title, string extract, string promote, Func<string,string>? findJson = null, bool isLogMode = false)
+    public Configuration(string title, string extract, string promote, Func<string,string>? findJson = null, bool isLogMode = false, string filterLogsBy = "")
     {
         _isLogMode = isLogMode;
+        _filterLogsBy = filterLogsBy;
         _typeConfigurations.Add(TypeConfiguration.DEFAULT, new TypeConfiguration
         {
             TypeFilter = TypeConfiguration.DEFAULT,
@@ -27,9 +28,10 @@ public class Configuration
         });
     }
 
-    public Configuration(List<TypeConfiguration> typeConfigurations, bool isLogMode = true)
+    public Configuration(List<TypeConfiguration> typeConfigurations, bool isLogMode = true, string filterLogsBy = "")
     {
         _isLogMode = isLogMode;
+        _filterLogsBy = filterLogsBy;
         typeConfigurations.ForEach(x => _typeConfigurations.Add(x.TypeFilter, x));
     }
 
@@ -43,7 +45,10 @@ public class Configuration
         return _isLogMode;
     }
     private bool _isLogMode;
-    
+    private readonly string _filterLogsBy;
+
+    public string FilterBy() => _filterLogsBy;
+
     public TypeConfiguration GetConfigurationForEventTypeInThisLine(string logLine)
     {
         foreach (var filter in _typeConfigurations.Values)

@@ -16,6 +16,7 @@ public class TestSystem
 
     private TypeConfiguration _currentTypeConfiguration = new TypeConfiguration() {TypeFilter = TypeConfiguration.DEFAULT};
     private List<TypeConfiguration> _currentTypeConfigurations = new();
+    private string _filterLogsBy;
 
     public static TestSystem UsingEmptyCanvas(string path = "empty_file_for_tests.canvas")
     {
@@ -59,7 +60,7 @@ public class TestSystem
     {
         _canvas= Canvas.Initialize(_filePath);
         _currentTypeConfigurations.Add(_currentTypeConfiguration);
-        var config = new Configuration(_currentTypeConfigurations, _isLogMode);
+        var config = new Configuration(_currentTypeConfigurations, _isLogMode, _filterLogsBy);
         _canvas.AnalyzeEvents("events_file_for_tests.txt", config);
         return this;
     }
@@ -134,6 +135,12 @@ public class TestSystem
         {
             TypeFilter = typeFilter
         };
+        return this;
+    }
+
+    public TestSystem Filter(string loggername)
+    {
+        _filterLogsBy = loggername;
         return this;
     }
 }

@@ -146,32 +146,33 @@ public class Canvas
     {
         try
         {
-            if (configuration.findJson != null)
+            if (configuration.IsLogMode())
             {
                 var lines = fileContent.Split(Environment.NewLine);
                 foreach (var line in lines)
                 {
-                    var element = configuration.findJson(line);
-                    var json = JsonDocument.Parse(element);
-                    if (json.RootElement.ValueKind == JsonValueKind.Object)
+                    var eventTypeConfig = configuration.GetConfigurationForEventTypeInThisLine(line);
+                    var foundEventString = eventTypeConfig.FindJson(line);
+                    var foundEvent = JsonDocument.Parse(foundEventString);
+                    if (foundEvent.RootElement.ValueKind == JsonValueKind.Object)
                     {
                         var streamEvent = new StreamEvent();
 
-                        streamEvent.Title = GetPropertyWithPath(json.RootElement, configuration.title);
-                        var toExtract = configuration.extract.Split(';', StringSplitOptions.RemoveEmptyEntries);
-                        var toPromote = configuration.promote.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                        streamEvent.Title = GetPropertyWithPath(foundEvent.RootElement, eventTypeConfig.Title);
+                        var toExtract = eventTypeConfig.Extract.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                        var toPromote = eventTypeConfig.Promote.Split(';', StringSplitOptions.RemoveEmptyEntries);
 
                         foreach (var extractThis in toExtract)
                         {
-                            streamEvent.Extracted.Add(extractThis, GetPropertyWithPath(json.RootElement, extractThis));
+                            streamEvent.Extracted.Add(extractThis, GetPropertyWithPath(foundEvent.RootElement, extractThis));
                         }
 
                         foreach (var promoteThis in toPromote)
                         {
-                            streamEvent.Promoted.Add(promoteThis, GetPropertyWithPath(json.RootElement, promoteThis));
+                            streamEvent.Promoted.Add(promoteThis, GetPropertyWithPath(foundEvent.RootElement, promoteThis));
                         }
 
-                        streamEvent.FullJson = json.RootElement.GetRawText();
+                        streamEvent.FullJson = foundEvent.RootElement.GetRawText();
 
                         events.Add(streamEvent);
                     }

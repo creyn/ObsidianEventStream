@@ -8,14 +8,14 @@ public class ParsingSingleJsonEvents
     [Fact]
     public void Card_title_is_heading_with_JSON_property()
     {
-     TestSystem.UsingEmptyCanvas().AnalyzeEventsStream("""
-                                                    [
-                                                     {
-                                                      "name": "Test event name",
-                                                      "description": "Description"
-                                                     }
-                                                    ]
-                                                    """)
+     TestSystem.UsingEmptyCanvas().AnalyzeEvents("""
+                                                [
+                                                 {
+                                                  "name": "Test event name",
+                                                  "description": "Description"
+                                                 }
+                                                ]
+                                                """)
       .WithTitle("name")
       .Gives()
       .SingleCard("# Test event name");
@@ -24,7 +24,7 @@ public class ParsingSingleJsonEvents
     [Fact]
     public void Card_extra_details_are_below_heading_and_has_property_name()
     {
-     TestSystem.UsingEmptyCanvas().AnalyzeEventsStream("""
+     TestSystem.UsingEmptyCanvas().AnalyzeEvents("""
                                                     [
                                                      {
                                                       "name": "Name",
@@ -44,15 +44,15 @@ public class ParsingSingleJsonEvents
     [Fact]
     public void Multiple_properties_can_be_extracted()
     {
-     TestSystem.UsingEmptyCanvas().AnalyzeEventsStream("""
-                                                    [
-                                                     {
-                                                      "name": "Name",
-                                                      "description": "This is description",
-                                                      "color": "red"
-                                                     }
-                                                    ]
-                                                    """)
+     TestSystem.UsingEmptyCanvas().AnalyzeEvents("""
+                                                [
+                                                 {
+                                                  "name": "Name",
+                                                  "description": "This is description",
+                                                  "color": "red"
+                                                 }
+                                                ]
+                                                """)
       .WithTitle("name")
       .WithExtraDetails("description;color")
       .Gives()
@@ -66,16 +66,16 @@ public class ParsingSingleJsonEvents
     [Fact]
     public void Title_can_be_taken_from_nested_object()
     {
-     TestSystem.UsingEmptyCanvas().AnalyzeEventsStream("""
-                                                    [
-                                                     {
-                                                      "name": {
-                                                        "first": "Adam",
-                                                        "second": "James"
-                                                      }
-                                                     }
-                                                    ]
-                                                    """)
+     TestSystem.UsingEmptyCanvas().AnalyzeEvents("""
+                                                [
+                                                 {
+                                                  "name": {
+                                                    "first": "Adam",
+                                                    "second": "James"
+                                                  }
+                                                 }
+                                                ]
+                                                """)
       .WithTitle("name.first")
       .Gives()
       .SingleCard("# Adam");
@@ -83,7 +83,7 @@ public class ParsingSingleJsonEvents
     
     public void Extra_details_can_be_taken_from_nested_object()
     {
-     TestSystem.UsingEmptyCanvas().AnalyzeEventsStream("""
+     TestSystem.UsingEmptyCanvas().AnalyzeEventsLogs("""
                                                     [
                                                      {
                                                       "name": {
@@ -105,16 +105,16 @@ public class ParsingSingleJsonEvents
     [Fact]
     public void Extra_details_can_be_taken_from_array()
     {
-     TestSystem.UsingEmptyCanvas().AnalyzeEventsStream("""
-                                                    [
-                                                     {
-                                                      "name": "Adam",
-                                                      "friends": [
-                                                       { "name": "First" }, { "name": "Second" }, { "name": "Third" } 
-                                                      ]
-                                                     }
-                                                    ]
-                                                    """)
+     TestSystem.UsingEmptyCanvas().AnalyzeEvents("""
+                                                [
+                                                 {
+                                                  "name": "Adam",
+                                                  "friends": [
+                                                   { "name": "First" }, { "name": "Second" }, { "name": "Third" } 
+                                                  ]
+                                                 }
+                                                ]
+                                                """)
       .WithTitle("name")
       .WithExtraDetails("friends.name")
       .Gives()
@@ -127,14 +127,14 @@ public class ParsingSingleJsonEvents
     [Fact]
     public void Promotion_gives_second_card_with_given_JSON_property()
     {
-     TestSystem.UsingEmptyCanvas().AnalyzeEventsStream("""
-                                                    [
-                                                     {
-                                                      "name": "Adam",
-                                                      "phone": "+12345"
-                                                     }
-                                                    ]
-                                                    """)
+     TestSystem.UsingEmptyCanvas().AnalyzeEvents("""
+                                                [
+                                                 {
+                                                  "name": "Adam",
+                                                  "phone": "+12345"
+                                                 }
+                                                ]
+                                                """)
       .WithTitle("name")
       .WithPromotion("phone")
       .Gives()

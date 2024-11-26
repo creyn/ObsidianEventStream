@@ -1,24 +1,25 @@
 ﻿namespace ObsidianEventStream;
 
+public class TypeConfiguration
+{
+    public const string DEFAULT = "_DEFAULT_TYPE_";
+    public string TypeFilter { get; set; } = "";
+    public string Title { get; set; } = "";
+    public string Extract { get; set; } = "";
+    public string Promote { get; set; } = "";
+    public Func<string, string>? FindJson { get; set; }
+}
+
 public class Configuration
 {
-    class TypeConfiguration
-    {
-        public string TypeFilter { get; set; }
-        public string Title { get; set; }
-        public string Extract { get; set; }
-        public string Promote { get; set; }
-        public Func<string, string>? FindJson { get; set; }
-    }
-
-    private const string DEFAULT_TYPE = "_DEFAULT_TYPE";
     private readonly Dictionary<string, TypeConfiguration> _typeConfigurations = new();
 
-    public Configuration(string title, string extract, string promote, Func<string,string>? findJson = null)
+    public Configuration(string title, string extract, string promote, Func<string,string>? findJson = null, bool isLogMode = false)
     {
-        _typeConfigurations.Add(DEFAULT_TYPE, new TypeConfiguration
+        _isLogMode = isLogMode;
+        _typeConfigurations.Add(TypeConfiguration.DEFAULT, new TypeConfiguration
         {
-            TypeFilter = DEFAULT_TYPE,
+            TypeFilter = TypeConfiguration.DEFAULT,
             Title = title,
             Extract = extract,
             Promote = promote,
@@ -26,8 +27,29 @@ public class Configuration
         });
     }
 
-    public string title => _typeConfigurations[DEFAULT_TYPE].Title;
-    public string extract => _typeConfigurations[DEFAULT_TYPE].Extract;
-    public string promote => _typeConfigurations[DEFAULT_TYPE].Promote;
-    public Func<string, string>? findJson => _typeConfigurations[DEFAULT_TYPE].FindJson;
+    public Configuration(List<TypeConfiguration> typeConfigurations, bool isLogMode = true)
+    {
+        _isLogMode = isLogMode;
+        typeConfigurations.ForEach(x => _typeConfigurations.Add(x.TypeFilter, x));
+    }
+
+    public string title => _typeConfigurations[TypeConfiguration.DEFAULT].Title;
+    public string extract => _typeConfigurations[TypeConfiguration.DEFAULT].Extract;
+    public string promote => _typeConfigurations[TypeConfiguration.DEFAULT].Promote;
+    public Func<string, string>? findJson => _typeConfigurations[TypeConfiguration.DEFAULT].FindJson;
+
+    public bool IsLogMode()
+    {
+        return _isLogMode;
+    }
+    private bool _isLogMode;
+    
+    public TypeConfiguration GetConfigurationForEventTypeInThisLine(string logLine)
+    {
+        foreach (var filter in _typeConfigurations.Values)
+        {
+            if (logLine.Contains(filter.TypeFilter)) return filter;
+        }
+        return _typeConfigurations.Single().Value;
+    }
 }

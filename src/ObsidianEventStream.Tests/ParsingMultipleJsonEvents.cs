@@ -8,13 +8,13 @@ public class ParsingMultipleJsonEvents
     [Fact]
     public void Multiple_JSON_events_produces_many_cards()
     {
-        TestSystem.UsingEmptyCanvas().AnalyzeEventsStream("""
-                                                          [
-                                                            { "name": "First" },
-                                                            { "name": "Second" },
-                                                            { "name": "Third" }
-                                                          ]
-                                                          """)
+        TestSystem.UsingEmptyCanvas().AnalyzeEvents("""
+                                                    [
+                                                      { "name": "First" },
+                                                      { "name": "Second" },
+                                                      { "name": "Third" }
+                                                    ]
+                                                    """)
             .WithTitle("name")
             .Gives()
             .FirstCard("# First")

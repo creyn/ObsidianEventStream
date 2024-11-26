@@ -12,6 +12,10 @@ public class TestSystem
     private string _currentCardIdForLinking;
     private Func<string, string> _findJsonInDelimitedTextLine;
     private string _currentLogType;
+    private bool _isLogMode = false;
+
+    private TypeConfiguration _currentTypeConfiguration = new TypeConfiguration() {TypeFilter = TypeConfiguration.DEFAULT};
+    private List<TypeConfiguration> _currentTypeConfigurations = new();
 
     public static TestSystem UsingEmptyCanvas(string path = "empty_file_for_tests.canvas")
     {
@@ -19,34 +23,43 @@ public class TestSystem
         var testSystem = new TestSystem {_filePath = path}; 
         return testSystem;
     }
-
-    public TestSystem AnalyzeEventsStream(string eventsStream)
+    
+    public TestSystem AnalyzeEvents(string eventsStream)
     {
         File.WriteAllText("events_file_for_tests.txt", eventsStream);
+        _isLogMode = false;
+        return this;
+    }
+
+    public TestSystem AnalyzeEventsLogs(string eventsStream)
+    {
+        File.WriteAllText("events_file_for_tests.txt", eventsStream);
+        _isLogMode = true;
         return this;
     }
 
     public TestSystem WithTitle(string titleProperty)
     {
-        _title = titleProperty;
+        _currentTypeConfiguration.Title = titleProperty;
         return this;
     }
  
     public TestSystem WithExtraDetails(string extractProperty)
     {
-        _extract = extractProperty;
+        _currentTypeConfiguration.Extract = extractProperty;
         return this;
     }
     public TestSystem WithPromotion(string promoteProperty)
     {
-        _promote = promoteProperty;
+        _currentTypeConfiguration.Promote = promoteProperty;
         return this;
     }
 
     public TestSystem Gives()
     {
         _canvas= Canvas.Initialize(_filePath);
-        var config = new Configuration(_title, _extract, _promote, _findJsonInDelimitedTextLine);
+        _currentTypeConfigurations.Add(_currentTypeConfiguration);
+        var config = new Configuration(_currentTypeConfigurations, _isLogMode);
         _canvas.AnalyzeEvents("events_file_for_tests.txt", config);
         return this;
     }
@@ -110,13 +123,17 @@ public class TestSystem
 
     public TestSystem TakeEvent(Func<string, string> findJsonInDelimitedTextLine)
     {
-        _findJsonInDelimitedTextLine = findJsonInDelimitedTextLine;
+        _currentTypeConfiguration.FindJson = findJsonInDelimitedTextLine;
         return this;
     }
 
     public TestSystem ForType(string typeFilter)
     {
-        _currentLogType = typeFilter;
+        _currentTypeConfigurations.Add(_currentTypeConfiguration);
+        _currentTypeConfiguration = new TypeConfiguration
+        {
+            TypeFilter = typeFilter
+        };
         return this;
     }
 }

@@ -178,6 +178,42 @@ public class Canvas
 
                         events.Add(streamEvent);
                     }
+                    else if (foundEvent.RootElement.ValueKind == JsonValueKind.Array) // more like a Dictionary?
+                    {
+                        var arrayIndex = -1;
+                        var streamEvent = new StreamEvent();
+                        streamEvent.FullJson = foundEvent.RootElement.GetRawText();
+                        foreach (var arrayElement in foundEvent.RootElement.EnumerateArray())
+                        {
+                            arrayIndex++;
+                            var filteringItem = $"[{arrayIndex}]";
+                            
+                            if (eventTypeConfig.Title.StartsWith((filteringItem)))
+                            {
+                                streamEvent.Title = GetPropertyWithPath(arrayElement, eventTypeConfig.Title, arrayIndex);
+                            }
+                            
+                            var toExtract = eventTypeConfig.Extract.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                            var toPromote = eventTypeConfig.Promote.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+                            foreach (var extractThis in toExtract)
+                            {
+                                if(extractThis.StartsWith(filteringItem) == false) continue;
+                                var val = GetPropertyWithPath(arrayElement, extractThis, arrayIndex);
+                                streamEvent.Extracted.Add(extractThis.Replace($"{filteringItem}.", "").Replace(filteringItem, ""), val);
+                            }
+
+                            foreach (var promoteThis in toPromote)
+                            {
+                                if(promoteThis.StartsWith(filteringItem) == false) continue;
+                                streamEvent.Promoted.Add(promoteThis.Replace($"{filteringItem}.", "").Replace(filteringItem, ""), GetPropertyWithPath(arrayElement, promoteThis, arrayIndex));
+                            }
+
+
+                        }
+                        
+                        events.Add(streamEvent);
+                    }
                 }
             }
             else
@@ -222,32 +258,42 @@ public class Canvas
         }
     }
 
-    private string GetPropertyWithPath(JsonElement element, string propPath)
+    private string GetPropertyWithPath(JsonElement element, string propPath, int indexInArray = -1)
     {
-        if (propPath.Contains('.') == false)
+        if (indexInArray >= 0)
         {
-            var propValue = element.GetProperty(propPath);
-            if (propValue.ValueKind == JsonValueKind.String) return propValue.ToString();
-            throw new Exception($"Cannot find property [{propPath}], kind is [{propValue.ValueKind}]");
+            if(propPath == $"[{indexInArray}]") return element.ToString();
+            if (propPath.Contains($"[{indexInArray}]."))
+                return GetPropertyWithPath(element, propPath.Replace($"[{indexInArray}].", ""), -1);
         }
-        
-        var names = propPath.Split('.', StringSplitOptions.RemoveEmptyEntries);
-        var firstLevelProp = element.GetProperty(names[0]);
-        if (firstLevelProp.ValueKind == JsonValueKind.Array)
+        else
         {
-            var listExtracted = new List<string>();
-            foreach (var arrayValues in firstLevelProp.EnumerateArray())
+            if (propPath.Contains('.') == false)
             {
-                listExtracted.Add(GetPropertyWithPath(arrayValues, string.Join('.', names.Skip(1))));
+                var propValue = element.GetProperty(propPath);
+                if (propValue.ValueKind == JsonValueKind.String || propValue.ValueKind == JsonValueKind.Number) return propValue.ToString();
+                throw new Exception($"Cannot find property [{propPath}], kind is [{propValue.ValueKind}]");
             }
 
-            return string.Join(';', listExtracted);
+            var names = propPath.Split('.', StringSplitOptions.RemoveEmptyEntries);
+            var firstLevelProp = element.GetProperty(names[0]);
+            if (firstLevelProp.ValueKind == JsonValueKind.Array)
+            {
+                var listExtracted = new List<string>();
+                foreach (var arrayValues in firstLevelProp.EnumerateArray())
+                {
+                    listExtracted.Add(GetPropertyWithPath(arrayValues, string.Join('.', names.Skip(1))));
+                }
+
+                return string.Join(';', listExtracted);
+            }
+
+            if (firstLevelProp.ValueKind == JsonValueKind.Object)
+            {
+                return firstLevelProp.GetProperty(names[1]).ToString();
+            }
         }
-        if (firstLevelProp.ValueKind == JsonValueKind.Object)
-        {
-            return firstLevelProp.GetProperty(names[1]).ToString();
-        }
-        
+
         return "";
     }
 
